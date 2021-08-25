@@ -10,16 +10,13 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
-import com.google.api.services.sheets.v4.model.*;
 import com.lyomann.service.GoogleSheetsService;
+import com.lyomann.wrapper.GoogleSheetsWrapper;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,9 +54,10 @@ public class MainServiceClass {
 
     public static void main(String[] args) throws Exception {
         Sheets sheetsSDK = initializeSheetsService();
-        GoogleSheetsService googleSheetsService = new GoogleSheetsService(sheetsSDK);
+        GoogleSheetsWrapper googleSheetsWrapper = new GoogleSheetsWrapper(sheetsSDK);
+        GoogleSheetsService googleSheetsService = new GoogleSheetsService(googleSheetsWrapper);
 
-        googleSheetsService.createNewSheetTab("Tab 15");
-        googleSheetsService.updateNewSheetTab("Tab 15");
+        googleSheetsService.createNewTab("Tab 17");
+        googleSheetsService.writeDaysOfTheWeek("Tab 17");
     }
 }
