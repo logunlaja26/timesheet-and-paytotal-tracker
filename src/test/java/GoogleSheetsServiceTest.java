@@ -21,12 +21,15 @@ public class GoogleSheetsServiceTest {
 
     @Test
     void createNewTab_createsANewTabWithCorrectTabName() {
+        String expectedTabName = "Tab 1";
         googleSheetsService.createNewTab("Tab 1");
 
         // TODO: Use Argument Captor of class BatchUpdateSpreadsheetRequest
+        ArgumentCaptor<BatchUpdateSpreadsheetRequest> batchUpdateSheetArgumentCaptor = ArgumentCaptor.forClass(BatchUpdateSpreadsheetRequest.class);;
         // TODO: Find title inside sheet properties which is inside BatchUpdateSpreadsheetRequest
-
         Mockito.verify(mockGoogleSheets).updateSpreadsheetWithNewTab(any(BatchUpdateSpreadsheetRequest.class));
+        BatchUpdateSpreadsheetRequest batchUpdateSpreadsheetRequest = batchUpdateSheetArgumentCaptor.getValue();
+        Assertions.assertEquals(expectedTabName, batchUpdateSpreadsheetRequest.getRequests());
     }
 
     @Test
@@ -41,5 +44,6 @@ public class GoogleSheetsServiceTest {
         ValueRange valueRange = valueRangeCaptor.getValue();
         Assertions.assertEquals(5, valueRange.getValues().get(0).size());
         Assertions.assertEquals(expectedDays, valueRange.getValues().get(0));
+        System.out.println(valueRange.getValues().get(0));
     }
 }
