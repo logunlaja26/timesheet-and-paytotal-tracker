@@ -17,7 +17,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+
 import java.util.List;
 
 public class MainServiceClass {
@@ -52,12 +57,18 @@ public class MainServiceClass {
                 .build();
     }
 
+    public static String tabNameByDateRange(){
+        LocalDate localDate = LocalDate.now();
+        LocalDate then = localDate.plusDays(6);
+        return localDate + "  -  " + then;
+    }
+
     public static void main(String[] args) throws Exception {
         Sheets sheetsSDK = initializeSheetsService();
         GoogleSheetsWrapper googleSheetsWrapper = new GoogleSheetsWrapper(sheetsSDK);
         GoogleSheetsService googleSheetsService = new GoogleSheetsService(googleSheetsWrapper);
 
-        googleSheetsService.createNewTab("Tab 17");
-        googleSheetsService.writeDaysOfTheWeek("Tab 17");
+        googleSheetsService.createNewTab(tabNameByDateRange());
+        googleSheetsService.writeDaysOfTheWeek(tabNameByDateRange());
     }
 }
