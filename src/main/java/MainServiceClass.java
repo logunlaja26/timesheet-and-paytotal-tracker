@@ -12,18 +12,16 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.lyomann.service.GoogleSheetsService;
 import com.lyomann.wrapper.GoogleSheetsWrapper;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-
 import java.util.List;
+
 
 public class MainServiceClass {
     private static final String APPLICATION_NAME = "Timesheet Tracker";
@@ -57,18 +55,25 @@ public class MainServiceClass {
                 .build();
     }
 
-    public static String tabNameByDateRange(){
+    public static String tabNameByDateRange() {
         LocalDate localDate = LocalDate.now();
         LocalDate then = localDate.plusDays(6);
         return localDate + "  -  " + then;
     }
 
-    public static void main(String[] args) throws Exception {
+    @Scheduled(cron = "*/10 * * * * *")
+    public static void scheduleTaskUsingCronExpression() throws Exception {
         Sheets sheetsSDK = initializeSheetsService();
         GoogleSheetsWrapper googleSheetsWrapper = new GoogleSheetsWrapper(sheetsSDK);
         GoogleSheetsService googleSheetsService = new GoogleSheetsService(googleSheetsWrapper);
 
         googleSheetsService.createNewTab(tabNameByDateRange());
         googleSheetsService.writeDaysOfTheWeek(tabNameByDateRange());
+
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        MainServiceClass.scheduleTaskUsingCronExpression();
     }
 }
