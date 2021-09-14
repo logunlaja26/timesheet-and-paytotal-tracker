@@ -68,7 +68,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.lyomann.MainServiceClass</mainClass>
+                            <mainClass>MainServiceClass</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
