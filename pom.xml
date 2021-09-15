@@ -26,7 +26,12 @@
         <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
-            <version>1.23.0</version>
+            <version>1.32.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson</artifactId>
+            <version>1.29.1</version>
         </dependency>
         <dependency>
             <groupId>com.google.oauth-client</groupId>
@@ -54,6 +59,11 @@
             <artifactId>spring-test</artifactId>
             <version>5.3.9</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.32.1</version>
         </dependency>
     </dependencies>
     <build>
