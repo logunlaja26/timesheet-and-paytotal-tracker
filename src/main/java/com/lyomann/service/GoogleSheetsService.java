@@ -50,7 +50,6 @@ public class GoogleSheetsService {
                 ));
 
         UpdateValuesResponse result = googleSheetsWrapper.insertDataIntoSheetTab(tabName, body);
-
         System.out.println(body);
         System.out.println(result);
     }
